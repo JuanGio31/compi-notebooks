@@ -1,0 +1,90 @@
+/* Definir el paquete */
+package analyzers;
+
+import java_cup.runtime.Symbol;
+
+class MParser;
+
+parser code {:
+    public void syntax_error(Symbol s){
+            System.out.println(
+                  "Error sintactico, Recuperable. No se esperaba el componente "
+                  + s.value
+                  + " en [ "
+                  + s.left
+                  + ", "
+                  + s.right
+                  + " ]"
+            );
+    }
+
+    public void unrecovered_syntac_error(Symbol s){
+            System.out.println(
+                  "Error sintactico. No recuperable. No se esperaba el componente "
+                  + s.value
+                  + " en [ "
+                  + s.left
+                  + ", "
+                  + s.right
+                  + " ]"
+            );
+    }
+
+//         listaErrores.add(new Errores(
+//                         TipoError.SINTACTICO,
+//                         ", Recuperable. No se esperaba el componente "+s.value,
+//                         s.left,
+//                         s.right));
+//     }
+:}
+
+/* Definir terminales (tokens) */
+//terminal Integer NUMERO;
+terminal HEADER_1, HEADER_2, HEADER_3, HEADER_4, HEADER_5, HEADER_6;
+terminal PLUS, INCISO, CADENA;
+terminal HASH;
+terminal SPACE;
+terminal ITALIC;
+terminal BOLD;
+terminal BOLD_ITALIC;
+//terminal SL;
+nonterminal header, inicio, estilo;
+
+start with inicio;
+
+inicio ::= inicio header
+        | inicio estilo
+        | header
+        | estilo
+        | error
+;
+
+header ::= HEADER_1:a   {:  System.out.println("declaracion de header1 > " + a.toString());   :}
+        | HEADER_2:a   {:  System.out.println("declaracion de header2 > " + a.toString());   :}
+        | HEADER_3:a   {:  System.out.println("declaracion de header3 > " + a.toString());   :}
+        | HEADER_4:a   {:  System.out.println("declaracion de header4 > " + a.toString());   :}
+        | HEADER_5:a   {:  System.out.println("declaracion de header5 > " + a.toString());   :}
+        | HEADER_6:a   {:  System.out.println("declaracion de header6 > " + a.toString());   :}
+;
+
+estilo ::= BOLD     {:      System.out.println("bold");     :}
+        | BOLD_ITALIC       {:      System.out.println("bold italic");     :}
+        | ITALIC        {:      System.out.println("italic");     :}
+;
+
+/*
+expr ::= expr:a MAS expr:b   {: RESULT = a + b; :}
+      | expr:a MENOS expr:b  {: RESULT = a - b; :}
+      | NUMERO:a          {: RESULT = a; :}
+      ;
+*/
+
+/*
+HASH
+TIMES
+PLUS
+SL
+SPACE
+INCISO
+CADENA
+*/

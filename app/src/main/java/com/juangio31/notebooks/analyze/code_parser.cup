@@ -1,0 +1,66 @@
+/* Definir el paquete */
+package analyzers;
+
+import java_cup.runtime.Symbol;
+
+class CParser;
+
+parser code {:
+    public void syntax_error(Symbol s){
+            System.out.println(
+                  "Error sintactico, Recuperable. No se esperaba el componente "
+                  + s.value
+                  + " en [ "
+                  + s.left
+                  + ", "
+                  + s.right
+                  + " ]"
+            );
+    }
+
+    public void unrecovered_syntac_error(Symbol s){
+            System.out.println(
+                  "Error sintactico. No recuperable. No se esperaba el componente "
+                  + s.value
+                  + " en [ "
+                  + s.left
+                  + ", "
+                  + s.right
+                  + " ]"
+            );
+    }
+:}
+
+//TOMAR EN CUENTA LOS SALTOS DE LINEA \n
+
+/* Definir terminales (tokens) */
+terminal String ID, TEXTO, DIGITO;
+terminal PRINT, FORMAT, SUMA, RESTA, MULT;
+terminal DIV, POTENCIA, PAR_I, PAR_D, IGUAL;
+terminal FINLINEA, UMENOS;
+
+nonterminal asignacion;
+nonterminal expr;
+nonterminal inicio;
+
+//** Precedencia **//
+precedence left SUMA, RESTA;
+precedence left MULT, DIV;
+precedence right UMENOS;
+
+start with inicio;
+
+inicio ::= inicio expr
+        | expr
+        | error
+;
+
+expr ::= RESTA expr:a         {:  System.out.println("-Digito");  :} %prec UMENOS
+       | expr:a SUMA expr:b     {:  System.out.println("suma");  :}
+       | expr:a RESTA expr:b    {:  System.out.println("resta");  :}
+       | expr:a MULT expr:b     {:  System.out.println("multiplicacion");  :}
+       | expr:a DIV expr:b      {:  System.out.println("division");  :}
+       | PAR_I expr:a PAR_D   {:  RESULT = a;  :}
+       | DIGITO:a             {:  RESULT = a;  :}
+       | ID:a                 {:  RESULT = a;  :}
+;
