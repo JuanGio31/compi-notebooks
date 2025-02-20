@@ -1,6 +1,6 @@
 /* Definir el paquete */
 package analyzers;
-import java_cup.runtime.*;
+import java_cup.runtime.Symbol;
 
 %%
 %public
@@ -11,7 +11,7 @@ import java_cup.runtime.*;
 %column
 
 %{
-    StringBuffer string = new StringBuffer();
+  StringBuffer string = new StringBuffer();
 
     private Symbol symbol(int tipo){
         return new Symbol(tipo, yyline, yycolumn);
@@ -26,7 +26,9 @@ salto = \r|\n|\r\n
 whiteSpace     = [ \t\f]
 
 id =        [a-zA-Z_][a-zA-Z0-9_]*
-digito =    [\d]+ (\.[\d]+)?
+entero =    [0-9]+
+decimal =   [0-9]+ "." [0-9]+
+//digito =    [\d]+ (\.[\d]+)?
 
 
 %eofval{
@@ -42,7 +44,10 @@ digito =    [\d]+ (\.[\d]+)?
 <YYINITIAL>    "format"  {     return symbol(CParserSym.FORMAT);      }
 
 <YYINITIAL> {
-    {digito}  {     return symbol(CParserSym.DIGITO, yytext());       }
+    //{digito}  {     return symbol(CParserSym.DIGITO, yytext());       }
+    {entero}  {     return symbol(CParserSym.INT, yytext());       }
+    {decimal} {     return symbol(CParserSym.DOUBLE, yytext());       }
+
     {id}      {     return symbol(CParserSym.ID, yytext());           }
 
     "+"       {     return symbol(CParserSym.SUMA);        }

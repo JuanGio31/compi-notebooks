@@ -1,0 +1,109 @@
+/* Definir el paquete */
+package analyzers;
+
+import java_cup.runtime.Symbol;
+import java.util.LinkedList;
+import arbol.*;
+
+class CParser;
+
+parser code {:
+    public void syntax_error(Symbol s){
+            System.out.println(
+                  "Error sintactico, Recuperable. No se esperaba el componente "
+                  + s.value
+                  + " en [ "
+                  + s.left
+                  + ", "
+                  + s.right
+                  + " ]"
+            );
+    }
+
+    public void unrecovered_syntac_error(Symbol s){
+            System.out.println(
+                  "Error sintactico. No recuperable. No se esperaba el componente "
+                  + s.value
+                  + " en [ "
+                  + s.left
+                  + ", "
+                  + s.right
+                  + " ]"
+            );
+    }
+:}
+
+//TOMAR EN CUENTA LOS SALTOS DE LINEA \n
+
+/* Definir terminales (tokens) */
+terminal String ID, TEXTO, INT, DOUBLE;
+terminal PRINT, FORMAT, SUMA, RESTA, MULT;
+terminal DIV, POTENCIA, PAR_I, PAR_D, IGUAL;
+terminal FINLINEA, UMENOS;
+
+nonterminal LinkedList<Instruccion> inicio;
+nonterminal LinkedList<Instruccion> instrucciones;
+nonterminal Instruccion instruccion;
+nonterminal Instruccion declaracion;
+nonterminal Instruccion print;
+nonterminal Instruccion expr;
+nonterminal Instruccion format;
+nonterminal String expr2;
+nonterminal String expr3;
+
+//** Precedencia **//
+precedence left SUMA, RESTA;
+precedence left MULT, DIV;
+precedence left UMENOS;
+precedence right POTENCIA;
+
+start with inicio;
+
+inicio ::= instrucciones:a      {:  RESULT = a; :}
+;
+
+instrucciones ::= instrucciones:a instruccion:b     {:  RESULT = a; RESULT.add(b);  :}
+                | instruccion:a                     {:  RESULT = new LinkedList<>(); RESULT.add(a); :}
+;
+
+instruccion ::= declaracion:a             {:  RESULT = a;   :}
+              | print:a                   {:  RESULT = a;   :}
+              | error FINLINEA
+;
+
+//Asignacion(String id, Instruccion expr, int linea, int columna)
+declaracion ::= ID:a IGUAL expr:b FINLINEA        {:  RESULT = new Asignacion(a, b, aleft, aright); :}
+;
+
+print ::= PRINT PAR_I expr:a PAR_D FINLINEA         {:  RESULT = new Print(a, aleft, aright);   :}
+;
+
+expr ::= RESTA expr:a           {:  RESULT = new Aritmeticos(a, Operacion.NEGACION, aleft, aright);  :} %prec UMENOS
+       | expr:a SUMA expr:b     {:  RESULT = new Aritmeticos(a, b, Operacion.SUMA, aleft, aright);  :}
+       | expr:a RESTA expr:b    {:  RESULT = new Aritmeticos(a, b, Operacion.RESTA, aleft, aright);  :}
+       | expr:a MULT expr:b     {:  RESULT = new Aritmeticos(a, b, Operacion.MULTIPLICACION, aleft, aright);  :}
+       | expr:a DIV expr:b      {:  RESULT = new Aritmeticos(a, b, Operacion.DIVISION, aleft, aright);  :}
+       | expr:a POTENCIA expr:b {:  RESULT = new Aritmeticos(a, b, Operacion.POTENCIA, aleft, aright);  :}%prec POTENCIA
+       | PAR_I expr:a PAR_D     {:  RESULT = a;  :}
+       | INT:a                  {:  RESULT = new Literal(Integer.parseInt(a), Tipo.INT, aleft, aright);  :}
+       | DOUBLE:a               {:  RESULT = new Literal(Double.parseDouble(a), Tipo.DOUBLE, aleft, aright);  :}
+       | ID:a                   {:  RESULT = new AccesoVariable(a, aleft, aright);  :}
+       | TEXTO:a                {:  RESULT = new Literal(a, Tipo.TEXTO, aleft, aright);  :}
+;
+
+format ::= FORMAT PAR_I expr:a PAR_D FINLINEA       {:  RESULT = new Format:}
+;
+
+expr2 ::= expr2 expr3       {:  RESULT = $1 + $2;   :}
+        | expr3             {:RESULT = $1; :}
+;
+
+expr3 ::= ID:a          {:  RESULT = a;     :}
+        | RESTA         {:  RESULT = " - " ;:}
+        | SUMA          {:  RESULT = " + " ;:}
+        | MULT          {:  RESULT = " * " ;:}
+        | DIV           {:  RESULT = " / " ;:}
+        | POTENCIA      {:  RESULT = "^" ;  :}
+        | INT:a         {:  RESULT = a;     :}
+        | DOUBLE:a      {:  RESULT = a;     :}
+;

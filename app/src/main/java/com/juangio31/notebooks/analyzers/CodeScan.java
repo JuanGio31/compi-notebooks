@@ -3,12 +3,12 @@
 // source: code_lexer.flex
 
 /* Definir el paquete */
-package com.juangio31.notebooks.analyze;
-import java_cup.runtime.*;
+package analyzers;
+import java_cup.runtime.Symbol;
 
 
 @SuppressWarnings("fallthrough")
-public class CodeScan implements Scanner {
+public class CodeScan implements java_cup.runtime.Scanner {
 
   /** This character denotes the end of file. */
   public static final int YYEOF = -1;
@@ -36,14 +36,7 @@ public class CodeScan implements Scanner {
   private static final int [] ZZ_CMAP_TOP = zzUnpackcmap_top();
 
   private static final String ZZ_CMAP_TOP_PACKED_0 =
-    "\1\0\5\u0100\1\u0200\1\u0300\1\u0100\5\u0400\1\u0500\1\u0600"+
-    "\1\u0700\6\u0100\1\u0800\1\u0900\1\u0a00\1\u0b00\1\u0c00\1\u0d00"+
-    "\3\u0100\1\u0e00\205\u0100\1\u0600\1\u0100\1\u0f00\1\u1000\1\u1100"+
-    "\1\u1200\54\u0100\10\u1300\37\u0100\1\u0900\4\u0100\1\u1400\10\u0100"+
-    "\1\u1500\2\u0100\1\u1600\1\u1700\1\u1200\1\u0100\1\u0500\1\u0100"+
-    "\1\u1800\1\u1500\1\u0800\3\u0100\1\u1100\1\u1900\114\u0100\1\u1a00"+
-    "\1\u1100\153\u0100\1\u1b00\11\u0100\1\u1c00\1\u1200\6\u0100\1\u1100"+
-    "\u0f16\u0100";
+    "\1\0\37\u0100\1\u0200\267\u0100\10\u0300\u1020\u0100";
 
   private static int [] zzUnpackcmap_top() {
     int [] result = new int[4352];
@@ -76,21 +69,11 @@ public class CodeScan implements Scanner {
     "\1\11\1\12\1\13\12\14\3\0\1\15\3\0\32\16"+
     "\1\0\1\17\1\0\1\20\1\16\1\0\1\21\4\16"+
     "\1\22\2\16\1\23\3\16\1\24\1\25\1\26\1\27"+
-    "\1\16\1\30\1\16\1\31\6\16\12\0\1\3\u01da\0"+
-    "\12\32\206\0\12\32\306\0\12\32\234\0\12\32\166\0"+
-    "\12\32\140\0\12\32\166\0\12\32\106\0\12\32\u0116\0"+
-    "\12\32\106\0\12\32\u0146\0\12\32\46\0\12\32\u012c\0"+
-    "\12\32\200\0\12\32\246\0\12\32\6\0\12\32\266\0"+
-    "\12\32\126\0\12\32\206\0\12\32\6\0\12\32\316\0"+
-    "\2\3\u01a6\0\12\32\46\0\12\32\306\0\12\32\26\0"+
-    "\12\32\126\0\12\32\u0196\0\12\32\6\0\u0100\3\240\0"+
-    "\12\32\206\0\12\32\u012c\0\12\32\200\0\12\32\74\0"+
-    "\12\32\220\0\12\32\166\0\12\32\146\0\12\32\206\0"+
-    "\12\32\106\0\12\32\266\0\12\32\u0164\0\62\32\100\0"+
-    "\12\32\266\0";
+    "\1\16\1\30\1\16\1\31\6\16\12\0\1\3\u01a2\0"+
+    "\2\3\326\0\u0100\3";
 
   private static int [] zzUnpackcmap_blocks() {
-    int [] result = new int[7424];
+    int [] result = new int[1024];
     int offset = 0;
     offset = zzUnpackcmap_blocks(ZZ_CMAP_BLOCKS_PACKED_0, offset, result);
     return result;
@@ -117,7 +100,7 @@ public class CodeScan implements Scanner {
     "\2\0\1\1\1\2\1\3\1\4\1\5\1\6\1\7"+
     "\1\10\1\11\1\12\1\13\1\14\1\15\1\16\2\15"+
     "\1\17\1\20\1\21\1\0\2\15\1\22\1\23\1\24"+
-    "\1\25\1\13\5\15\1\26\1\27";
+    "\1\25\1\26\5\15\1\27\1\30";
 
   private static int [] zzUnpackAction() {
     int [] result = new int[36];
@@ -145,11 +128,11 @@ public class CodeScan implements Scanner {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\33\0\66\0\66\0\121\0\66\0\66\0\66"+
-    "\0\66\0\66\0\66\0\66\0\154\0\66\0\207\0\66"+
-    "\0\242\0\275\0\330\0\66\0\363\0\u010e\0\u0129\0\u0144"+
-    "\0\66\0\66\0\66\0\66\0\u010e\0\u015f\0\u017a\0\u0195"+
-    "\0\u01b0\0\u01cb\0\207\0\207";
+    "\0\0\0\32\0\64\0\64\0\116\0\64\0\64\0\64"+
+    "\0\64\0\64\0\64\0\64\0\150\0\64\0\202\0\64"+
+    "\0\234\0\266\0\320\0\64\0\352\0\u0104\0\u011e\0\u0138"+
+    "\0\64\0\64\0\64\0\64\0\u0104\0\u0152\0\u016c\0\u0186"+
+    "\0\u01a0\0\u01ba\0\202\0\202";
 
   private static int [] zzUnpackRowMap() {
     int [] result = new int[36];
@@ -177,24 +160,23 @@ public class CodeScan implements Scanner {
   private static final String ZZ_TRANS_PACKED_0 =
     "\1\3\1\4\1\5\1\0\1\6\1\7\1\10\1\11"+
     "\1\12\1\13\1\3\1\14\1\15\1\16\1\17\1\3"+
-    "\1\20\1\17\1\21\4\17\1\22\2\17\1\15\2\23"+
-    "\1\0\1\23\1\24\12\23\1\25\13\23\35\0\1\5"+
-    "\42\0\1\26\1\0\1\15\15\0\1\15\14\0\1\17"+
-    "\1\0\1\17\2\0\11\17\15\0\1\17\1\0\1\17"+
-    "\2\0\5\17\1\27\3\17\15\0\1\17\1\0\1\17"+
-    "\2\0\7\17\1\30\1\17\1\0\2\23\1\0\1\23"+
-    "\1\0\12\23\1\0\13\23\4\0\1\31\20\0\1\32"+
-    "\2\0\1\33\1\34\15\0\1\35\15\0\1\35\14\0"+
-    "\1\17\1\0\1\17\2\0\7\17\1\36\1\17\15\0"+
-    "\1\17\1\0\1\17\2\0\2\17\1\37\6\17\15\0"+
-    "\1\17\1\0\1\17\2\0\3\17\1\40\5\17\15\0"+
-    "\1\17\1\0\1\17\2\0\4\17\1\41\4\17\15\0"+
-    "\1\17\1\0\1\17\2\0\1\42\10\17\15\0\1\17"+
-    "\1\0\1\17\2\0\10\17\1\43\15\0\1\17\1\0"+
-    "\1\17\2\0\10\17\1\44\1\0";
+    "\1\20\1\17\1\21\4\17\1\22\2\17\2\23\1\0"+
+    "\1\23\1\24\12\23\1\25\12\23\34\0\1\5\41\0"+
+    "\1\26\1\0\1\15\31\0\1\17\1\0\1\17\2\0"+
+    "\11\17\14\0\1\17\1\0\1\17\2\0\5\17\1\27"+
+    "\3\17\14\0\1\17\1\0\1\17\2\0\7\17\1\30"+
+    "\1\17\2\23\1\0\1\23\1\0\12\23\1\0\12\23"+
+    "\4\0\1\31\20\0\1\32\2\0\1\33\1\34\14\0"+
+    "\1\35\31\0\1\17\1\0\1\17\2\0\7\17\1\36"+
+    "\1\17\14\0\1\17\1\0\1\17\2\0\2\17\1\37"+
+    "\6\17\14\0\1\17\1\0\1\17\2\0\3\17\1\40"+
+    "\5\17\14\0\1\17\1\0\1\17\2\0\4\17\1\41"+
+    "\4\17\14\0\1\17\1\0\1\17\2\0\1\42\10\17"+
+    "\14\0\1\17\1\0\1\17\2\0\10\17\1\43\14\0"+
+    "\1\17\1\0\1\17\2\0\10\17\1\44";
 
   private static int [] zzUnpacktrans() {
-    int [] result = new int[486];
+    int [] result = new int[468];
     int offset = 0;
     offset = zzUnpacktrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -318,7 +300,7 @@ public class CodeScan implements Scanner {
   private boolean zzEOFDone;
 
   /* user code: */
-    StringBuffer string = new StringBuffer();
+  StringBuffer string = new StringBuffer();
 
     private Symbol symbol(int tipo){
         return new Symbol(tipo, yyline, yycolumn);
@@ -610,7 +592,7 @@ public class CodeScan implements Scanner {
    * @return the next token.
    * @exception java.io.IOException if any I/O-Error occurs.
    */
-  @Override  public Symbol next_token() throws java.io.IOException
+  @Override  public java_cup.runtime.Symbol next_token() throws java.io.IOException
   {
     int zzInput;
     int zzAction;
@@ -757,118 +739,123 @@ public class CodeScan implements Scanner {
             { System.err.println("Carácter no reconocido: " + yytext());
             }
           // fall through
-          case 24: break;
+          case 25: break;
           case 2:
             { /*no hacer nada*/
             }
           // fall through
-          case 25: break;
+          case 26: break;
           case 3:
             { return symbol(CParserSym.FINLINEA);
             }
           // fall through
-          case 26: break;
+          case 27: break;
           case 4:
             { string.setLength(0); yybegin(STRING);
             }
           // fall through
-          case 27: break;
+          case 28: break;
           case 5:
             { return symbol(CParserSym.PAR_I);
             }
           // fall through
-          case 28: break;
+          case 29: break;
           case 6:
             { return symbol(CParserSym.PAR_D);
             }
           // fall through
-          case 29: break;
+          case 30: break;
           case 7:
             { return symbol(CParserSym.MULT);
             }
           // fall through
-          case 30: break;
+          case 31: break;
           case 8:
             { return symbol(CParserSym.SUMA);
             }
           // fall through
-          case 31: break;
+          case 32: break;
           case 9:
             { return symbol(CParserSym.RESTA);
             }
           // fall through
-          case 32: break;
+          case 33: break;
           case 10:
             { return symbol(CParserSym.DIV);
             }
           // fall through
-          case 33: break;
+          case 34: break;
           case 11:
-            { return symbol(CParserSym.DIGITO, yytext());
+            { return symbol(CParserSym.INT, yytext());
             }
           // fall through
-          case 34: break;
+          case 35: break;
           case 12:
             { return symbol(CParserSym.IGUAL);
             }
           // fall through
-          case 35: break;
+          case 36: break;
           case 13:
             { return symbol(CParserSym.ID, yytext());
             }
           // fall through
-          case 36: break;
+          case 37: break;
           case 14:
             { return symbol(CParserSym.POTENCIA);
             }
           // fall through
-          case 37: break;
+          case 38: break;
           case 15:
             { string.append( yytext() );
             }
           // fall through
-          case 38: break;
+          case 39: break;
           case 16:
             { yybegin(YYINITIAL);
                 return symbol(CParserSym.TEXTO, string.toString());
             }
           // fall through
-          case 39: break;
+          case 40: break;
           case 17:
             { string.append('\\');
             }
           // fall through
-          case 40: break;
+          case 41: break;
           case 18:
             { string.append('\"');
             }
           // fall through
-          case 41: break;
+          case 42: break;
           case 19:
             { string.append('\n');
             }
           // fall through
-          case 42: break;
+          case 43: break;
           case 20:
             { string.append('\r');
             }
           // fall through
-          case 43: break;
+          case 44: break;
           case 21:
             { string.append('\t');
             }
           // fall through
-          case 44: break;
-          case 22:
-            { return symbol(CParserSym.PRINT);
-            }
-          // fall through
           case 45: break;
-          case 23:
-            { return symbol(CParserSym.FORMAT);
+          case 22:
+            { return symbol(CParserSym.DOUBLE, yytext());
             }
           // fall through
           case 46: break;
+          case 23:
+            { return symbol(CParserSym.PRINT);
+            }
+          // fall through
+          case 47: break;
+          case 24:
+            { return symbol(CParserSym.FORMAT);
+            }
+          // fall through
+          case 48: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }

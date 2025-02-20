@@ -3,12 +3,12 @@
 // source: markdown_scan.flex
 
 /* Definir el paquete */
-package com.juangio31.notebooks.analyze;
+package analyzers;
 import java_cup.runtime.*;
 
 
 @SuppressWarnings("fallthrough")
-public class MarkdownScan implements Scanner {
+public class MarkdownScan implements java_cup.runtime.Scanner {
 
   /** This character denotes the end of file. */
   public static final int YYEOF = -1;
@@ -602,7 +602,7 @@ public class MarkdownScan implements Scanner {
    * @return the next token.
    * @exception java.io.IOException if any I/O-Error occurs.
    */
-  @Override  public Symbol next_token() throws java.io.IOException
+  @Override  public java_cup.runtime.Symbol next_token() throws java.io.IOException
   {
     int zzInput;
     int zzAction;
