@@ -1,8 +1,5 @@
-package arbol;
+package com.juangio31.notebooks.arbol;
 
 public enum Tipo {
-    NUMERO,
-    TEXTO,
-    VARIABLE,
-    INT, DOUBLE, VOID
+    TEXTO, VARIABLE, INT, DOUBLE, VOID, HEADER, OL, UL, PARRAFO, BOLD, ITALIC, BOLD_ITALIC
 }

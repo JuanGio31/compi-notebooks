@@ -1,4 +1,4 @@
-package arbol;
+package com.juangio31.notebooks.arbol;
 
 public enum Operacion {
     SUMA,

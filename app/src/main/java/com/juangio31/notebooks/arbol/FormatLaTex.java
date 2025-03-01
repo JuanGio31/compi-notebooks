@@ -1,4 +1,4 @@
-package arbol;
+package com.juangio31.notebooks.arbol;
 
 public class FormatLaTex extends Instruccion {
     private String string;

@@ -1,4 +1,6 @@
-package arbol;
+package com.juangio31.notebooks.arbol;
+
+import android.util.Log;
 
 public class Print extends Instruccion {
     private Instruccion cadena;
@@ -11,6 +13,7 @@ public class Print extends Instruccion {
     @Override
     public Object interpreter(AST ast, Contexto contexto) {
         System.out.println(this.cadena.interpreter(ast, contexto));
-        return 1;
+
+        return this.cadena.interpreter(ast, contexto);
     }
 }

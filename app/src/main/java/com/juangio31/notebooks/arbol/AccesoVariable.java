@@ -1,6 +1,4 @@
-package arbol;
-
-import java.util.Objects;
+package com.juangio31.notebooks.arbol;
 
 public class AccesoVariable extends Instruccion {
     private String id;

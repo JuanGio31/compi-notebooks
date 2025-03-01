@@ -1,4 +1,4 @@
-package arbol;
+package com.juangio31.notebooks.arbol;
 
 public class Aritmeticos extends Instruccion {
     private Instruccion operando_1;
@@ -56,7 +56,7 @@ public class Aritmeticos extends Instruccion {
 
     public Object sumar(Object exprIzq, Object exprDer) {
         switch (this.operando_1.tipo) {
-            case Tipo.INT -> {
+            case INT -> {
                 switch (this.operando_2.tipo) {
                     case INT -> {
                         this.tipo = Tipo.INT;
@@ -106,7 +106,7 @@ public class Aritmeticos extends Instruccion {
 
     public Object restar(Object exprIzq, Object exprDer) {
         switch (this.operando_1.tipo) {
-            case Tipo.INT -> {
+            case INT -> {
                 switch (this.operando_2.tipo) {
                     case INT -> {
                         this.tipo = Tipo.INT;
@@ -156,7 +156,7 @@ public class Aritmeticos extends Instruccion {
 
     public Object multiplicar(Object exprIzq, Object exprDer) {
         switch (this.operando_1.tipo) {
-            case Tipo.INT -> {
+            case INT -> {
                 switch (this.operando_2.tipo) {
                     case INT -> {
                         this.tipo = Tipo.INT;
@@ -209,7 +209,7 @@ public class Aritmeticos extends Instruccion {
         if (aux == 0.0) return new ErrorInterprete("Semantico", "Division por cero", this.linea, this.columna);
 
         switch (this.operando_1.tipo) {
-            case Tipo.INT -> {
+            case INT -> {
                 switch (this.operando_2.tipo) {
                     case INT -> {
                         this.tipo = Tipo.INT;
@@ -259,7 +259,7 @@ public class Aritmeticos extends Instruccion {
 
     public Object potenciar(Object exprIzq, Object exprDer) {
         switch (this.operando_1.tipo) {
-            case Tipo.INT -> {
+            case INT -> {
                 switch (this.operando_2.tipo) {
                     case INT -> {
                         this.tipo = Tipo.INT;

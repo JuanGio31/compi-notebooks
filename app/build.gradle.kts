@@ -1,6 +1,3 @@
-import org.gradle.internal.impldep.bsh.commands.dir
-import org.jetbrains.kotlin.ir.backend.js.loadIr
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -31,11 +28,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
@@ -43,6 +40,12 @@ android {
 }
 
 dependencies {
+
+    //LaTex
+      //  implementation (libs.android.pdf.viewer)
+
+
+
 
     //cup_runtime
     // https://mvnrepository.com/artifact/com.github.vbmacher/java-cup-runtime
@@ -57,6 +60,8 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.recyclerview)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
