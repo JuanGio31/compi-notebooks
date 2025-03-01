@@ -3,8 +3,7 @@
 // source: markdown_scan.flex
 
 /* Definir el paquete */
-package analyzers;
-
+package com.juangio31.notebooks.analyzers;
 import java_cup.runtime.Symbol;
 
 
@@ -27,7 +26,7 @@ public class MarkdownScan implements java_cup.runtime.Scanner {
    * l is of the form l = 2*k, k a non negative integer
    */
   private static final int ZZ_LEXSTATE[] = {
-     0, 0
+     0, 1
   };
 
   /**
@@ -36,14 +35,7 @@ public class MarkdownScan implements java_cup.runtime.Scanner {
   private static final int [] ZZ_CMAP_TOP = zzUnpackcmap_top();
 
   private static final String ZZ_CMAP_TOP_PACKED_0 =
-    "\1\0\5\u0100\1\u0200\1\u0300\1\u0100\5\u0400\1\u0500\1\u0600"+
-    "\1\u0700\5\u0100\1\u0800\1\u0900\1\u0a00\1\u0b00\1\u0c00\1\u0d00"+
-    "\1\u0e00\3\u0100\1\u0f00\17\u0100\1\u1000\165\u0100\1\u0600\1\u0100"+
-    "\1\u1100\1\u1200\1\u1300\1\u1400\54\u0100\10\u1500\37\u0100\1\u0a00"+
-    "\4\u0100\1\u1600\10\u0100\1\u1700\2\u0100\1\u1800\1\u1900\1\u1400"+
-    "\1\u0100\1\u0500\1\u0100\1\u1a00\1\u1700\1\u0900\3\u0100\1\u1300"+
-    "\1\u1b00\114\u0100\1\u1c00\1\u1300\153\u0100\1\u1d00\11\u0100\1\u1e00"+
-    "\1\u1400\6\u0100\1\u1300\u0f16\u0100";
+    "\1\0\u10ff\u0100";
 
   private static int [] zzUnpackcmap_top() {
     int [] result = new int[4352];
@@ -71,24 +63,12 @@ public class MarkdownScan implements java_cup.runtime.Scanner {
   private static final int [] ZZ_CMAP_BLOCKS = zzUnpackcmap_blocks();
 
   private static final String ZZ_CMAP_BLOCKS_PACKED_0 =
-    "\11\0\1\1\1\2\2\3\1\4\22\0\1\5\2\0"+
-    "\1\6\6\0\1\7\1\10\2\0\1\11\1\0\12\12"+
-    "\42\0\1\13\50\0\1\3\32\0\1\14\u01bf\0\12\12"+
-    "\206\0\12\12\306\0\12\12\234\0\12\12\166\0\12\12"+
-    "\140\0\12\12\166\0\12\12\106\0\12\12\u0116\0\12\12"+
-    "\106\0\12\12\346\0\1\14\u015f\0\12\12\46\0\12\12"+
-    "\u012c\0\12\12\200\0\12\12\246\0\12\12\6\0\12\12"+
-    "\266\0\12\12\126\0\12\12\206\0\12\12\6\0\12\12"+
-    "\246\0\13\14\35\0\2\3\5\0\1\14\57\0\1\14"+
-    "\240\0\1\14\u01cf\0\12\12\46\0\12\12\306\0\12\12"+
-    "\26\0\12\12\126\0\12\12\u0196\0\12\12\6\0\u0100\15"+
-    "\240\0\12\12\206\0\12\12\u012c\0\12\12\200\0\12\12"+
-    "\74\0\12\12\220\0\12\12\166\0\12\12\146\0\12\12"+
-    "\206\0\12\12\106\0\12\12\266\0\12\12\u0164\0\62\12"+
-    "\100\0\12\12\266\0";
+    "\11\0\1\1\1\2\2\0\1\1\22\0\1\3\2\0"+
+    "\1\4\6\0\1\5\1\6\2\0\1\7\1\0\1\10"+
+    "\11\11\u01c6\0";
 
   private static int [] zzUnpackcmap_blocks() {
-    int [] result = new int[7936];
+    int [] result = new int[512];
     int offset = 0;
     offset = zzUnpackcmap_blocks(ZZ_CMAP_BLOCKS_PACKED_0, offset, result);
     return result;
@@ -112,11 +92,11 @@ public class MarkdownScan implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\0\2\1\1\0\1\1\1\2\2\1\3\0\1\3"+
-    "\4\0\1\4\1\0\1\5\1\4\1\0\1\5\2\0";
+    "\2\0\1\1\1\2\1\3\1\4\4\1\1\5\1\6"+
+    "\1\0\1\7\2\0\1\10\1\0\1\11\3\0";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[24];
+    int [] result = new int[22];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -141,12 +121,12 @@ public class MarkdownScan implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\16\0\34\0\52\0\70\0\16\0\106\0\52"+
-    "\0\124\0\70\0\142\0\16\0\106\0\160\0\176\0\214"+
-    "\0\232\0\250\0\266\0\16\0\304\0\322\0\340\0\356";
+    "\0\0\0\12\0\24\0\36\0\50\0\62\0\74\0\106"+
+    "\0\120\0\132\0\144\0\24\0\156\0\24\0\170\0\132"+
+    "\0\24\0\202\0\24\0\214\0\226\0\240";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[24];
+    int [] result = new int[22];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -169,22 +149,16 @@ public class MarkdownScan implements java_cup.runtime.Scanner {
   private static final int [] ZZ_TRANS = zzUnpacktrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\2\1\3\3\4\1\3\1\2\1\5\1\6\1\2"+
-    "\1\7\1\2\1\10\20\0\5\4\1\11\1\12\4\0"+
-    "\1\4\2\0\5\4\1\0\1\12\4\0\1\4\1\0"+
-    "\2\13\1\0\1\13\1\0\6\13\1\0\2\13\11\0"+
-    "\1\14\1\15\10\0\1\16\1\17\7\0\2\20\1\13"+
-    "\1\20\1\13\6\20\1\13\2\20\2\21\1\0\2\21"+
-    "\1\0\10\21\5\0\1\16\1\22\7\0\2\20\1\13"+
-    "\1\20\1\13\2\20\1\23\3\20\1\13\2\20\2\21"+
-    "\1\24\1\21\1\24\11\21\5\0\1\16\1\25\7\0"+
-    "\1\20\1\23\1\26\1\23\1\26\1\23\1\20\1\23"+
-    "\3\20\1\13\1\23\1\20\5\0\1\16\1\27\7\0"+
-    "\1\20\1\23\1\26\1\23\1\26\1\23\5\20\1\13"+
-    "\1\23\1\20\5\0\1\16\1\30\14\0\1\16\10\0";
+    "\1\3\1\4\1\5\1\4\1\3\1\6\1\3\1\7"+
+    "\3\3\1\4\1\5\1\4\1\10\1\6\1\11\1\7"+
+    "\1\3\1\12\13\0\1\4\1\0\1\4\10\0\1\5"+
+    "\14\0\1\13\13\0\1\7\5\0\1\14\1\15\10\0"+
+    "\1\16\15\0\1\17\2\20\5\0\1\21\7\0\1\14"+
+    "\1\22\10\0\1\23\11\0\1\14\1\24\10\0\1\14"+
+    "\1\25\10\0\1\14\1\26\10\0\1\14\6\0";
 
   private static int [] zzUnpacktrans() {
-    int [] result = new int[252];
+    int [] result = new int[170];
     int offset = 0;
     offset = zzUnpacktrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -227,12 +201,11 @@ public class MarkdownScan implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\1\11\1\1\1\0\1\1\1\11\2\1\3\0"+
-    "\1\11\4\0\1\1\1\0\1\1\1\11\1\0\1\1"+
-    "\2\0";
+    "\2\0\1\11\10\1\1\11\1\0\1\11\2\0\1\11"+
+    "\1\0\1\11\3\0";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[24];
+    int [] result = new int[22];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -302,7 +275,6 @@ public class MarkdownScan implements java_cup.runtime.Scanner {
   private long yychar;
 
   /** Whether the scanner is currently at the beginning of a line. */
-  @SuppressWarnings("unused")
   private boolean zzAtBOL = true;
 
   /** Whether the user-EOF-code has already been executed. */
@@ -316,10 +288,6 @@ public class MarkdownScan implements java_cup.runtime.Scanner {
   private Symbol symbol(int tipo, Object value){
       return new Symbol(tipo, yyline, yycolumn, value);
   }
-
-//  StringBuffer strBold = new StringBuffer();
-//  StringBuffer strItalic = new StringBuffer();
-//  StringBuffer strBoldItalic = new StringBuffer();
 
 
   /**
@@ -678,11 +646,44 @@ public class MarkdownScan implements java_cup.runtime.Scanner {
         }
         if (zzPeek) yyline--;
       }
+      if (zzMarkedPosL > zzStartRead) {
+        switch (zzBufferL[zzMarkedPosL-1]) {
+        case '\n':
+        case '\u000B':  // fall through
+        case '\u000C':  // fall through
+        case '\u0085':  // fall through
+        case '\u2028':  // fall through
+        case '\u2029':  // fall through
+          zzAtBOL = true;
+          break;
+        case '\r': 
+          if (zzMarkedPosL < zzEndReadL)
+            zzAtBOL = zzBufferL[zzMarkedPosL] != '\n';
+          else if (zzAtEOF)
+            zzAtBOL = false;
+          else {
+            boolean eof = zzRefill();
+            zzMarkedPosL = zzMarkedPos;
+            zzEndReadL = zzEndRead;
+            zzBufferL = zzBuffer;
+            if (eof) 
+              zzAtBOL = false;
+            else 
+              zzAtBOL = zzBufferL[zzMarkedPosL] != '\n';
+          }
+          break;
+        default:
+          zzAtBOL = false;
+        }
+      }
       zzAction = -1;
 
       zzCurrentPosL = zzCurrentPos = zzStartRead = zzMarkedPosL;
 
-      zzState = ZZ_LEXSTATE[zzLexicalState];
+      if (zzAtBOL)
+        zzState = ZZ_LEXSTATE[zzLexicalState+1];
+      else
+        zzState = ZZ_LEXSTATE[zzLexicalState];
 
       // set up zzAction for empty match case:
       int zzAttributes = zzAttrL[zzState];
@@ -747,79 +748,52 @@ public class MarkdownScan implements java_cup.runtime.Scanner {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
-            { System.err.println("Carácter no reconocido: " + yytext());
-            }
-          // fall through
-          case 6: break;
-          case 2:
-            { return symbol(MParserSym.PLUS, yytext());
-            }
-          // fall through
-          case 7: break;
-          case 3:
-            { return symbol(MParserSym.INCISO, yytext());
-            }
-          // fall through
-          case 8: break;
-          case 4:
-            { String str = yytext().toString();
-            char[] simbolo = str.toCharArray();
-            int count = 0;
-
-            for(int i = 0; i < simbolo.length; i++) {
-                if (simbolo[i]!='#'){
-                    break;
-                }
-                count++;
-            }
-            switch (count){
-                case 1 :
-                    return symbol(MParserSym.HEADER_1, str.substring(2));
-                case 2:
-                    return symbol(MParserSym.HEADER_2, str.substring(3));
-                case 3 :
-                    return symbol(MParserSym.HEADER_3, str.substring(4));
-                case 4:
-                    return symbol(MParserSym.HEADER_4, str.substring(5));
-                case 5 :
-                    return symbol(MParserSym.HEADER_5, str.substring(6));
-                case 6:
-                    return symbol(MParserSym.HEADER_6, str.substring(7));
-            }
-            }
-          // fall through
-          case 9: break;
-          case 5:
-            { String str = yytext().toString().trim();
-                char[] temp = str.toCharArray();
-                int countFirt = 0, countEnd = 0;
-
-                for(int i = 0; i < temp.length; i++) {
-                  if(temp[i]!='*'){
-                      break;
-                  }
-                  countFirt++;
-                }
-
-                for(int i = temp.length-1; i > 0; i--) {
-                  if(temp[i]!='*'){
-                      break;
-                  }
-                  countEnd++;
-                }
-
-                if ((countEnd==1 && countFirt >=1) || (countEnd>=1 && countFirt==1)){
-                    return symbol(MParserSym.ITALIC, str.substring(1,str.length()-1));
-                }
-                if ((countEnd==2 && countFirt >=2) || (countEnd>=2 && countFirt ==2)){
-                    return symbol(MParserSym.BOLD, str.substring(2,str.length()-2));
-                }
-                if ((countEnd==3 && countFirt >=3) || (countEnd>=3 && countFirt ==3)){
-                    return symbol(MParserSym.BOLD_ITALIC, str.substring(3,str.length()-3));
-                }
+            { return symbol(MParserSym.TEXT, yytext());
             }
           // fall through
           case 10: break;
+          case 2:
+            { /* Ignorar espacios en blanco */
+            }
+          // fall through
+          case 11: break;
+          case 3:
+            { return symbol(MParserSym.ENDL);
+            }
+          // fall through
+          case 12: break;
+          case 4:
+            { return symbol(MParserSym.ITALIC, yytext());
+            }
+          // fall through
+          case 13: break;
+          case 5:
+            { return symbol(MParserSym.BOLD, yytext());
+            }
+          // fall through
+          case 14: break;
+          case 6:
+            { return symbol(MParserSym.HD, yytext());
+            }
+          // fall through
+          case 15: break;
+          case 7:
+            { return symbol(MParserSym.LIST_ITEM_HYPHEN, yytext());
+            }
+          // fall through
+          case 16: break;
+          case 8:
+            { return symbol(MParserSym.BOLD_ITALIC, yytext());
+            }
+          // fall through
+          case 17: break;
+          case 9:
+            { String str = yytext().toString();
+                    String numeroStr = str.split("\\.")[0]; // Toma la parte antes del punto
+                    return symbol(MParserSym.LIST_ITEM_NUM, numeroStr);
+            }
+          // fall through
+          case 18: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }

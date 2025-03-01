@@ -1,7 +1,9 @@
 /* Definir el paquete */
-package analyzers;
+package com.juangio31.notebooks.analyzers;
 
 import java_cup.runtime.Symbol;
+import java.util.LinkedList;
+import com.juangio31.notebooks.arbol.*;
 
 class MParser;
 
@@ -38,53 +40,87 @@ parser code {:
 //     }
 :}
 
-/* Definir terminales (tokens) */
-//terminal Integer NUMERO;
-terminal HEADER_1, HEADER_2, HEADER_3, HEADER_4, HEADER_5, HEADER_6;
-terminal PLUS, INCISO, CADENA;
-terminal HASH;
-terminal SPACE;
-terminal ITALIC;
-terminal BOLD;
-terminal BOLD_ITALIC;
-//terminal SL;
-nonterminal header, inicio, estilo;
+/* Declaración de terminales (tokens) */
+terminal String BOLD, ITALIC, BOLD_ITALIC, LIST_ITEM_NUM, TEXT;
+terminal LIST_ITEM_HYPHEN;
+terminal String HEADER1, HEADER2, HEADER3, HEADER4, HEADER5, HEADER6, HD;
+terminal ENDL;
 
-start with inicio;
+/* Declaración de no terminales */
+nonterminal LinkedList<Instruccion> INICIO;
+nonterminal LinkedList<Instruccion> INSTRUCCIONES;
+nonterminal Instruccion INSTRUCCION;
+nonterminal String EXPR;
+nonterminal Instruccion HEADER;
+nonterminal Instruccion LISTAS;
+nonterminal Instruccion PARRAFO;
+nonterminal Instruccion ELEMENTO;
+nonterminal LinkedList<Instruccion> ORDEN;
+nonterminal LinkedList<Instruccion> TXT_MULTI, TXT_LINEA;
+nonterminal Instruccion ELINEA, EMLINEA;
 
-inicio ::= inicio header
-        | inicio estilo
-        | header
-        | estilo
-        | error
+start with INICIO;
+
+INICIO ::= INSTRUCCIONES:a          {:  RESULT = a; :}
 ;
 
-header ::= HEADER_1:a   {:  System.out.println("declaracion de header1 > " + a.toString());   :}
-        | HEADER_2:a   {:  System.out.println("declaracion de header2 > " + a.toString());   :}
-        | HEADER_3:a   {:  System.out.println("declaracion de header3 > " + a.toString());   :}
-        | HEADER_4:a   {:  System.out.println("declaracion de header4 > " + a.toString());   :}
-        | HEADER_5:a   {:  System.out.println("declaracion de header5 > " + a.toString());   :}
-        | HEADER_6:a   {:  System.out.println("declaracion de header6 > " + a.toString());   :}
+INSTRUCCIONES ::= INSTRUCCIONES:a INSTRUCCION:b     {:  RESULT = a; RESULT.add(b);  :}
+                | INSTRUCCION:a                     {:  RESULT = new LinkedList<>(); RESULT.add(a); :}
 ;
 
-estilo ::= BOLD     {:      System.out.println("bold");     :}
-        | BOLD_ITALIC       {:      System.out.println("bold italic");     :}
-        | ITALIC        {:      System.out.println("italic");     :}
+INSTRUCCION ::= HEADER:a            {:  RESULT = a; :}
+              | PARRAFO:a ENDL           {:  RESULT = a; :}
+              | LISTAS:a ENDL           {:RESULT =a;:}
+              | error ENDL
 ;
 
-/*
-expr ::= expr:a MAS expr:b   {: RESULT = a + b; :}
-      | expr:a MENOS expr:b  {: RESULT = a - b; :}
-      | NUMERO:a          {: RESULT = a; :}
-      ;
-*/
+//PARRAFO ::= EMLINEA:a     {:RESULT = a;:}
+//        | TXT_LINEA:a ENDL    {:RESULT = a;:}
+//        | TXT_MULTI:a     {:RESULT = a;:}
+//;
 
-/*
-HASH
-TIMES
-PLUS
-SL
-SPACE
-INCISO
-CADENA
-*/
+EXPR ::= HEADER6 | HEADER5 | HEADER4 | HEADER3 | HEADER2 | HEADER1
+;
+
+HEADER ::= HD:a ELINEA:e ENDL          {:  RESULT = new Header(new Literal(a, Tipo.TEXTO, aleft, aright), e, eleft, eright);  :}
+    //    | EXPR:a TXT_LINEA:e ENDL          {:  RESULT = new Header(a, e, aleft, aright);  :}
+;
+
+LISTAS ::=  ORDEN:a    {:RESULT = new Lista((LinkedList<Instruccion>)a, Tipo.OL, aleft, aright);:}
+;
+
+ELEMENTO ::= LIST_ITEM_NUM:b TXT_LINEA:a
+            {:  RESULT = new Elemento(new Literal(b, Tipo.TEXTO, bleft, bright), a, Tipo.OL, aleft, aright); :}
+            | LIST_ITEM_HYPHEN TXT_LINEA:a
+            {:  RESULT = new Elemento(a, Tipo.UL, aleft, aright); :}
+;
+
+ORDEN ::= ORDEN:a ELEMENTO:b      {:  RESULT = a; RESULT.add(b);  :}
+            | ELEMENTO:a                    {:  RESULT = new LinkedList<>(); RESULT.add(a); :}
+;
+
+PARRAFO ::=  EMLINEA:a  {:RESULT = new Parrafo(a, Tipo.PARRAFO, aleft, aright);:}
+ //           | TXT_LINEA:a       {:RESULT = new Normal(a, aleftm, aright);:}
+;
+
+TXT_LINEA ::= TXT_LINEA:b TEXT:a       {:  RESULT = b; RESULT.add(new Literal(a, Tipo.TEXTO, aleft, aright)); :}
+            | TEXT:a                    {:  RESULT = new LinkedList<>(); RESULT.add(new Literal(a, Tipo.TEXTO, aleft, aright)); :}
+;
+
+ELINEA ::= BOLD_ITALIC TXT_LINEA:a BOLD_ITALIC    {:  RESULT = new Estilo(a, Tipo.BOLD_ITALIC, aleft, aright);  :}
+          | BOLD TXT_LINEA:a BOLD                   {:  RESULT = new Estilo(a, Tipo.BOLD, aleft, aright);  :}
+          | ITALIC TXT_LINEA:a ITALIC               {:  RESULT = new Estilo(a, Tipo.ITALIC, aleft, aright);  :}
+;
+
+TXT_MULTI ::= TXT_MULTI:b TEXT:a ENDL      {:  RESULT = b; RESULT.add(new Literal(a, Tipo.TEXTO, aleft, aright)); :}
+            | TEXT:a ENDL                    {:  RESULT = new LinkedList<>(); RESULT.add(new Literal(a, Tipo.TEXTO, aleft, aright)); :}
+;
+
+EMLINEA ::= BOLD_ITALIC TXT_MULTI:a BOLD_ITALIC    {:  RESULT = new Estilo(a, Tipo.BOLD_ITALIC, aleft, aright);  :}
+          | BOLD_ITALIC TXT_LINEA:a BOLD_ITALIC    {:  RESULT = new Estilo(a, Tipo.BOLD_ITALIC, aleft, aright);  :}
+          | BOLD TXT_MULTI:a BOLD                   {:  RESULT = new Estilo(a, Tipo.BOLD, aleft, aright);  :}
+          | BOLD TXT_LINEA:a BOLD                   {:  RESULT = new Estilo(a, Tipo.BOLD, aleft, aright);  :}
+          | ITALIC TXT_MULTI:a ITALIC               {:  RESULT = new Estilo(a, Tipo.ITALIC, aleft, aright);  :}
+          | ITALIC TXT_LINEA:a ITALIC               {:  RESULT = new Estilo(a, Tipo.ITALIC, aleft, aright);  :}
+          | TXT_MULTI:a      {:RESULT = new Normal(a, aleft, aright);:}
+;
