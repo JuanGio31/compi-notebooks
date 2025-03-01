@@ -1,9 +1,17 @@
 /* Definir el paquete */
-package analyzers;
+package com.juangio31.notebooks.analyzers;
 
 import java_cup.runtime.Symbol;
 import java.util.LinkedList;
-import arbol.*;
+import com.juangio31.notebooks.arbol.AccesoVariable;
+import com.juangio31.notebooks.arbol.Aritmeticos;
+import com.juangio31.notebooks.arbol.Asignacion;
+import com.juangio31.notebooks.arbol.Instruccion;
+import com.juangio31.notebooks.arbol.Literal;
+import com.juangio31.notebooks.arbol.Operacion;
+import com.juangio31.notebooks.arbol.Print;
+import com.juangio31.notebooks.arbol.Tipo;
+import com.juangio31.notebooks.arbol.FormatLaTex;
 
 class CParser;
 
@@ -83,7 +91,7 @@ expr ::= RESTA expr:a           {:  RESULT = new Aritmeticos(a, Operacion.NEGACI
        | expr:a RESTA expr:b    {:  RESULT = new Aritmeticos(a, b, Operacion.RESTA, aleft, aright);  :}
        | expr:a MULT expr:b     {:  RESULT = new Aritmeticos(a, b, Operacion.MULTIPLICACION, aleft, aright);  :}
        | expr:a DIV expr:b      {:  RESULT = new Aritmeticos(a, b, Operacion.DIVISION, aleft, aright);  :}
-       | expr:a POTENCIA expr:b {:  RESULT = new Aritmeticos(a, b, Operacion.POTENCIA, aleft, aright);  :}%prec POTENCIA
+       | expr:a POTENCIA expr:b {:  RESULT = new Aritmeticos(a, b, Operacion.POTENCIA, aleft, aright);  :}
        | PAR_I expr:a PAR_D     {:  RESULT = a;  :}
        | INT:a                  {:  RESULT = new Literal(Integer.parseInt(a), Tipo.INT, aleft, aright);  :}
        | DOUBLE:a               {:  RESULT = new Literal(Double.parseDouble(a), Tipo.DOUBLE, aleft, aright);  :}
@@ -91,11 +99,11 @@ expr ::= RESTA expr:a           {:  RESULT = new Aritmeticos(a, Operacion.NEGACI
        | TEXTO:a                {:  RESULT = new Literal(a, Tipo.TEXTO, aleft, aright);  :}
 ;
 
-format ::= FORMAT PAR_I expr:a PAR_D FINLINEA       {:  RESULT = new Format:}
+format ::= FORMAT PAR_I expr:a PAR_D FINLINEA       {:  RESULT = new FormatLaTex(a.toString(), aleft, aright);  :}
 ;
 
-expr2 ::= expr2 expr3       {:  RESULT = $1 + $2;   :}
-        | expr3             {:RESULT = $1; :}
+expr2 ::= expr2:a expr3:b       {:  RESULT = a + b;   :}
+        | expr3:a             {:RESULT = a; :}
 ;
 
 expr3 ::= ID:a          {:  RESULT = a;     :}

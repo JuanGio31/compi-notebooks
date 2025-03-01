@@ -3,7 +3,7 @@
 // source: code_lexer.flex
 
 /* Definir el paquete */
-package analyzers;
+package com.juangio31.notebooks.analyzers;
 import java_cup.runtime.Symbol;
 
 

@@ -1,5 +1,5 @@
 /* Definir el paquete */
-package analyzers;
+package com.juangio31.notebooks.analyzers;
 import java_cup.runtime.Symbol;
 
 %%
@@ -54,7 +54,7 @@ decimal =   [0-9]+ "." [0-9]+
     "-"       {     return symbol(CParserSym.RESTA);       }
     "*"       {     return symbol(CParserSym.MULT);        }
     "/"       {     return symbol(CParserSym.DIV);         }
-    "^"       {     return symbol(CParserSym.POTENCIA);    }
+    \^       {     return symbol(CParserSym.POTENCIA);    }
     "("       {     return symbol(CParserSym.PAR_I);       }   //parentesis izquierdo (abierto)
     ")"       {     return symbol(CParserSym.PAR_D);       }   //parentesis derecho (cerrado)
     "="       {     return symbol(CParserSym.IGUAL);       }
